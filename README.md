@@ -17,7 +17,7 @@
 
 解压： 将压缩包内的所有文件，解压到《虫虫生态箱》的游戏根目录 (也就是与 Bugtopia.exe 文件放在一起)。
 
-安装本Mod： 到本项目的 Released 处下载 SuperBuildMode.dll 文件。
+安装本Mod： [下载 SuperBuildMode.dll](https://github.com/KittyClub-Yuxiu/Bugtopia-SuperBuildMode/releases)。
 
 放入插件文件夹： 将 SuperBuildMode.dll 文件，放入游戏根目录下的 BepInEx/plugins 文件夹内。(如果 plugins 文件夹不存在，请先运行一次游戏，它会自动生成)。
 
