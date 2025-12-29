@@ -1,3 +1,6 @@
+
+<img width="334" height="334" alt="QQ20251229-101341" src="https://github.com/user-attachments/assets/448005b9-3e6f-4d3e-be77-99907201266d" />
+
 **超级建造模式 (Super Build Mode)**
 
 **简介：**
