@@ -1,7 +1,5 @@
 using BepInEx;
 using HarmonyLib;
-using Micosmo.SensorToolkit;
-using System.Collections.Generic;
 using UnityEngine;
 using Peecub;
 
@@ -18,41 +16,16 @@ public class SuperBuildMode : BaseUnityPlugin
     [HarmonyPatch(typeof(LandscapeSensors), "ChangeColor")]
     class Patch_LandscapeSensors_ChangeColor
     {
-        private static void Postfix(LandscapeSensors __instance, SpriteRenderer spriteRenderer)
+        private static bool Prefix(LandscapeSensors __instance, SpriteRenderer spriteRenderer)
         {
-            var negativeSensorsField = AccessTools.Field(typeof(LandscapeSensors), "negativeSensors");
-            var resultField = AccessTools.Field(typeof(LandscapeSensors), "result");
+            AccessTools.Field(typeof(LandscapeSensors), "result").SetValue(__instance, true);
 
-            List<Sensor> negativeSensors = (List<Sensor>)negativeSensorsField.GetValue(__instance);
-            bool originalResult = (bool)resultField.GetValue(__instance);
-
-            if (originalResult)
+            if (spriteRenderer != null && RM.instance != null)
             {
-                return;
+                spriteRenderer.color = RM.instance.sensorTrueColor;
             }
-
-            bool preservedCheckPassed = true;
-            if (negativeSensors != null)
-            {
-                foreach (var sensor in negativeSensors)
-                {
-                    if (sensor.GetDetections(null).Count != 0)
-                    {
-                        preservedCheckPassed = false;
-                        break;
-                    }
-                }
-            }
-
-            if (preservedCheckPassed)
-            {
-                resultField.SetValue(__instance, true);
-
-                if (spriteRenderer != null && RM.instance != null)
-                {
-                    spriteRenderer.color = RM.instance.sensorTrueColor;
-                }
-            }
+            
+            return false;
         }
     }
 }
